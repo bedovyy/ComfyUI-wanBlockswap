@@ -27,7 +27,7 @@ class WanVideoBlockSwap:
         
         def swap_blocks(model: ModelPatcher, device_to, lowvram_model_memory, force_patch_weights, full_load):
             base_model = model.model
-            main_device=torch.device('cuda')
+            main_device=torch.device(comfy.model_management.get_torch_device())
             if isinstance(base_model, WAN21):
                 unet = base_model.diffusion_model
             for b, block in tqdm(enumerate(unet.blocks), total=len(unet.blocks), desc="Initializing block swap"):
